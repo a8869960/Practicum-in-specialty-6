@@ -14,26 +14,29 @@ void *process_main(void *arg_)
         for(int j = 0; j < n2; j++)
         {
             if (i == 0 or j == 0 or j == n2 - 1 or i == n1 - 1) //верх лево право низ
-            {
                 a_help[i * n2 + j] = -1;
-                continue;
-            }
-
-            product = a[(i - 1) * n2 + j] * a[(i + 1) * n2 + j] * a[i * n2 + j - 1] * a[i * n2 + j + 1];
+            else
+            {
+                product = a[(i - 1) * n2 + j] * a[(i + 1) * n2 + j] * a[i * n2 + j - 1] * a[i * n2 + j + 1];
 //             cout << a[(i - 1) * n2 + j] << a[(i + 1) * n2 + j] << a[i * n2 + j - 1] << a[i + n2 + j + 1] << endl;
-            if (product < 0)
-            {
-                a_help[i * n2 + j] = -1;
-                continue;
-            } else
-                a_help[i * n2 + j] = pow(product, 1 / 4.0);
+                if (product < 0)
+                    a_help[i * n2 + j] = -1;
+                else
+                    a_help[i * n2 + j] = pow(product, 1. / 4.);
+            }
         }
     reduce_sum(p);
 
-    // if(m == 0)
-        // for(int i = 0; i < n; i++)
-            // cout << a_help[i] << " ";
-    // cout << endl;
+//    if(arg->m == 0)
+//    {
+//        for(int i = 0; i < n1; i++)
+//        {
+//            for(int j = 0; j < n2; j++)
+//                printf("%10.3e ", a_help[i * n2 + j]);
+//            cout << endl;
+//        }
+//        cout << endl;
+//    }
 
     for(int i = m; i < n; i += p)
     {

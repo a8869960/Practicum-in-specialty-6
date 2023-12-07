@@ -44,13 +44,17 @@ int main(int ac, char *av[])
         if(read_a(filename, a, n) == -1)
             return -1;
 
-       cout << "          ";
-       for(i = 0; i < n; i++)
-           printf("%10.3e ", a[i]);
-       cout << endl;
+//       for(i = 0; i < n1; i++)
+//        {
+//            for(int j = 0; j < n2; j++)
+//                printf("%10.3e ", a[i * n2 + j]);
+//            cout << endl;
+//        }
+//        cout << endl;
 
         //Заполним аргументы
         ARGS *args = new ARGS[p];
+        double *a_help = new double[n]; 
         for(i = 0; i < p; i++)
         {
             args[i].p = p;
@@ -58,7 +62,7 @@ int main(int ac, char *av[])
             args[i].a = a;
             args[i].n1 = n1;
             args[i].n2 = n2;
-            args[i].a_help = new double[n];
+            args[i].a_help = a_help;
         }
 
         // Создаем потоки
@@ -70,20 +74,26 @@ int main(int ac, char *av[])
                 cout << "Cannot create thread " << i << endl;
                 delete[] threads;
                 delete[] args;
+                delete[] a;
+                delete[] a_help;
                 return -4;
             }
         }
 
         //Ждем потоки
-        for(int i = 0; i < p; i++)
+        for(i = 0; i < p; i++)
         {
             if(pthread_join(threads[i], 0))
                 cout << "Cannot wait thread " << i << endl;
         }
 
-        cout << "RESULT " << p << ": ";
-        for(i = 0; i < n; i++)
-            printf("%10.3e ", a[i]);
+        cout << "RESULT " << p << ": " << endl;
+        for(i = 0; i < n1; i++)
+        {
+            for(int j = 0; j < n2; j++)
+                printf("%10.3e ", a[i * n2 + j]);
+            cout << endl;
+        }
         cout << endl;
 
         cout << "CPU TIME" << endl;
@@ -102,6 +112,7 @@ int main(int ac, char *av[])
         delete[] threads;
         delete[] args;
         delete[] a;
+        delete[] a_help;
 
     } catch (const bad_alloc& e)
     {

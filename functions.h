@@ -37,11 +37,6 @@ public:
     double full_time = 0;
 
     io_status status = io_status::none;
-
-    ~ARGS()
-    {
-        delete[] a_help;
-    }
 };
 
 //other_functions.cpp
