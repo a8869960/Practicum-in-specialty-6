@@ -27,17 +27,6 @@ void *process_main(void *arg_)
         }
     reduce_sum(p);
 
-//    if(arg->m == 0)
-//    {
-//        for(int i = 0; i < n1; i++)
-//        {
-//            for(int j = 0; j < n2; j++)
-//                printf("%10.3e ", a_help[i * n2 + j]);
-//            cout << endl;
-//        }
-//        cout << endl;
-//    }
-
     for(int i = m; i < n; i += p)
     {
         if(fabs(a_help[i] + 1) < 1e-16)

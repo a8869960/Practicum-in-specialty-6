@@ -44,14 +44,6 @@ int main(int ac, char *av[])
         if(read_a(filename, a, n) == -1)
             return -1;
 
-//       for(i = 0; i < n1; i++)
-//        {
-//            for(int j = 0; j < n2; j++)
-//                printf("%10.3e ", a[i * n2 + j]);
-//            cout << endl;
-//        }
-//        cout << endl;
-
         //Заполним аргументы
         ARGS *args = new ARGS[p];
         double *a_help = new double[n]; 
